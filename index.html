@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Taste</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 0.5em;
+        }
+
+        input {
+            padding: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* 추가된 스타일 부분 */
+        #result p:last-child {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Game Taste</h1>
+    </header>
+
+    <section>
+        <h2>환영합니다!</h2>
+        <p>당신의 게임 취향을 알려주세요.</p>
+
+        <form onsubmit="event.preventDefault();">
+            <label for="gamePreference">게임 취향 입력:</label>
+            <input type="text" id="gamePreference" name="gamePreference" placeholder="예: RPG, FPS, 스포츠 등" onkeypress="handleKeyPress(event)">
+            <button type="button" onclick="submitGamePreference()">OK</button>
+        </form>
+
+        <!-- 결과를 표시하는 부분 -->
+        <div id="result"></div>
+
+        <!-- 동영상을 재생하는 부분 -->
+        <div id="videoPlayer"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Game Taste</p>
+    </footer>
+
+    <script>
+        function handleKeyPress(event) {
+            // 엔터 키가 눌렸을 때
+            if (event.key === 'Enter') {
+                submitGamePreference();
+            }
+        }
+
+        function playVideoAndDisplayResult(gamePreference, videoUrl, videoTitle) {
+            var resultContainer = document.getElementById("result");
+            var videoPlayerContainer = document.getElementById("videoPlayer");
+
+            // 결과 표시 부분 초기화
+            resultContainer.innerHTML = "";
+            // 동영상 재생 부분 초기화
+            videoPlayerContainer.innerHTML = "";
+
+            resultContainer.innerHTML = "<p>당신의 게임 취향: " + gamePreference + "</p>";
+            videoPlayerContainer.innerHTML = '<iframe width="560" height="315" src="' + videoUrl + '?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            resultContainer.innerHTML += "<p>" + videoTitle + "</p>";
+        }
+
+        function submitGamePreference() {
+            var gamePreference = document.getElementById("gamePreference").value.toLowerCase();
+            
+            // 스타듀밸리
+            if (gamePreference === "캐주얼" || gamePreference === "농사") {
+                playVideoAndDisplayResult(gamePreference, "https://www.youtube.com/embed/-vlBE3vSfNU", "스타듀밸리");
+            }
+            // 액션, 사이버펑크 SANABI
+            else if (gamePreference === "액션" || gamePreference === "사이버펑크") {
+                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/wZ6wx0rSL8M", "SANABI");
+            }
+            // 고양이, Cats Hidden in Jingle Jam
+            else if (gamePreference === "고양이" || gamePreference === "귀여운") {
+                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/Iwm3fu7SkH4", "Cats Hidden in Jingle Jam");
+            }
+            // RPG 발더스 게이트3
+            else if (gamePreference === "rpg" || gamePreference === "전략") {
+                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/KFEjIEjJS7s", "발더스 게이트 3");
+            }
+            // 추가적인 게임 취향에 대한 처리를 여기에 추가
+            // ...
+
+            else {
+                document.getElementById("result").innerHTML = "<p>당신의 게임 취향: " + gamePreference + "</p>";
+            }
+        }
+    </script>
+</body>
+</html>
