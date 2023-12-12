@@ -10,4 +10,4 @@
 3. 사용자가 입력한 장르에서 추천 된 게임 이름과 게임 유튜브 영상이 출력된다
 
 ## 3️⃣ 개발환경 및 도구
-Visual Studio Code, JavaSccript, OpenAI 활용
+Visual Studio Code, JavaScript, OpenAI 활용
