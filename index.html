@@ -96,6 +96,18 @@
     </footer>
 
     <script>
+        const gamePreferences = {
+            "캐주얼": { url: "https://www.youtube.com/embed/-vlBE3vSfNU", title: "스타듀밸리" },
+            "농사": { url: "https://www.youtube.com/embed/-vlBE3vSfNU", title: "스타듀밸리" },
+            "액션": { url: "https://youtube.com/embed/wZ6wx0rSL8M", title: "SANABI" },
+            "사이버펑크": { url: "https://youtube.com/embed/wZ6wx0rSL8M", title: "SANABI" },
+            "고양이": { url: "https://youtube.com/embed/Iwm3fu7SkH4", title: "Cats Hidden in Jingle Jam" },
+            "귀여운": { url: "https://youtube.com/embed/Iwm3fu7SkH4", title: "Cats Hidden in Jingle Jam" },
+            "rpg": { url: "https://youtube.com/embed/KFEjIEjJS7s", title: "발더스 게이트 3" },
+            "전략": { url: "https://youtube.com/embed/KFEjIEjJS7s", title: "발더스 게이트 3" },
+            // 추가적인 게임 취향에 대한 처리를 여기에 추가
+        };
+
         function handleKeyPress(event) {
             // 엔터 키가 눌렸을 때
             if (event.key === 'Enter') {
@@ -103,44 +115,28 @@
             }
         }
 
-        function playVideoAndDisplayResult(gamePreference, videoUrl, videoTitle) {
-            var resultContainer = document.getElementById("result");
-            var videoPlayerContainer = document.getElementById("videoPlayer");
+        function playVideoAndDisplayResult(gamePreference) {
+            const resultContainer = document.getElementById("result");
+            const videoPlayerContainer = document.getElementById("videoPlayer");
+            const { url, title } = gamePreferences[gamePreference];
 
             // 결과 표시 부분 초기화
             resultContainer.innerHTML = "";
             // 동영상 재생 부분 초기화
             videoPlayerContainer.innerHTML = "";
 
-            resultContainer.innerHTML = "<p>당신의 게임 취향: " + gamePreference + "</p>";
-            videoPlayerContainer.innerHTML = '<iframe width="560" height="315" src="' + videoUrl + '?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-            resultContainer.innerHTML += "<p>" + videoTitle + "</p>";
+            resultContainer.innerHTML = `<p>당신의 게임 취향: ${gamePreference}</p>`;
+            videoPlayerContainer.innerHTML = `<iframe width="560" height="315" src="${url}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            resultContainer.innerHTML += `<p>${title}</p>`;
         }
 
         function submitGamePreference() {
-            var gamePreference = document.getElementById("gamePreference").value.toLowerCase();
-            
-            // 스타듀밸리
-            if (gamePreference === "캐주얼" || gamePreference === "농사") {
-                playVideoAndDisplayResult(gamePreference, "https://www.youtube.com/embed/-vlBE3vSfNU", "스타듀밸리");
-            }
-            // 액션, 사이버펑크 SANABI
-            else if (gamePreference === "액션" || gamePreference === "사이버펑크") {
-                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/wZ6wx0rSL8M", "SANABI");
-            }
-            // 고양이, Cats Hidden in Jingle Jam
-            else if (gamePreference === "고양이" || gamePreference === "귀여운") {
-                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/Iwm3fu7SkH4", "Cats Hidden in Jingle Jam");
-            }
-            // RPG 발더스 게이트3
-            else if (gamePreference === "rpg" || gamePreference === "전략") {
-                playVideoAndDisplayResult(gamePreference, "https://youtube.com/embed/KFEjIEjJS7s", "발더스 게이트 3");
-            }
-            // 추가적인 게임 취향에 대한 처리를 여기에 추가
-            // ...
+            const gamePreference = document.getElementById("gamePreference").value.toLowerCase();
 
-            else {
-                document.getElementById("result").innerHTML = "<p>당신의 게임 취향: " + gamePreference + "</p>";
+            if (gamePreferences[gamePreference]) {
+                playVideoAndDisplayResult(gamePreference);
+            } else {
+                document.getElementById("result").innerHTML = `<p>당신의 게임 취향: ${gamePreference}</p>`;
             }
         }
     </script>
